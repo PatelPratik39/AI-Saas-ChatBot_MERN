@@ -6,5 +6,18 @@ export const loginUser = async(email:string, password:string) => {
         throw new Error("Unable to login");
     }
     const data = await res.data;
+    console.log(res.data);
+    
     return data;
 }
+
+export const checkAuthStatus = async() => {
+    const res = await axios.get("/user/auth-status");
+    if(res.status !== 200){
+        throw new Error("Unable to Unauthenticate");
+    }
+    const data = await res.data;
+    console.log(res.data);
+    return data;
+}
+
