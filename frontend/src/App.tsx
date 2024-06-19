@@ -6,7 +6,10 @@ import Chat from "./pages/Chat";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 
+
 function App() {
+
+
   return (
     <main>
       <Header />
