@@ -15,7 +15,7 @@ const CustomizedInput = (props: Props) => {
             type={props.type}
             InputProps={{
                 style: {
-                    width: "400px",
+                    width: "500px",
                     borderRadius: 10,
                     fontSize: 20,
                     color: "white",

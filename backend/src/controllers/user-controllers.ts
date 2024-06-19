@@ -40,7 +40,7 @@ export const userSignUp = async (
       signed: true,
       path: "/"
     });
-    
+
     // create Token
     const token = createToken(user._id.toString(), user.email, "7d");
 
@@ -56,7 +56,11 @@ export const userSignUp = async (
     });
     return res
       .status(201)
-      .json({ message: "User created successfully", id: user._id.toString() });
+      .json({
+        message: "User created successfully",
+        name: user.name,
+        email: user.email
+      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Error", cause: error.message });
@@ -99,8 +103,10 @@ export const userLogin = async (
       httpOnly: true,
       signed: true
     });
-
-    return res.status(200).json({ message: "OK", id: user._id.toString() });
+    return res
+      .status(200)
+      .json({ message: "OK", name: user.name, email: user.email });
+    // return res.status(200).json({ message: "OK", id: user._id.toString() });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Error", cause: error.message });
