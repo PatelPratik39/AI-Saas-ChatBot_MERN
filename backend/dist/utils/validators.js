@@ -25,10 +25,15 @@ export const loginValidator = [
 // Signup Validator
 export const signUpValidator = [
     body("name")
-        .isLength({ min: 3 })
-        .withMessage("Name must be at least 3 characters long"),
+        .notEmpty()
+        .withMessage("Name is Required!!"),
     // body('email').isEmail().withMessage('Email is not valid'),
     // body('password').trim().isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
     ...loginValidator
+];
+export const chatCompletionValidator = [
+    body("message")
+        .notEmpty()
+        .withMessage("Message is Required!!")
 ];
 //# sourceMappingURL=validators.js.map
