@@ -37,7 +37,7 @@
 
 import { NextFunction, Request, Response } from "express";
 import User from "../models/User.js";
-import { openai } from "../config/openAi-config.js";
+import loadOpenAIApi from "../config/openAi-config.js";
 import { ChatCompletionRequestMessage } from 'openai';
 
 export const generateChatCompletion = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,6 +54,9 @@ export const generateChatCompletion = async (req: Request, res: Response, next: 
     chats.push({ content: message, role: "user" });
     user.chats.push({ content: message, role: "user" });
 
+    // Load OpenAI API dynamically
+    const openai = await loadOpenAIApi();
+
     // Get latest response
     const chatResponse = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -66,7 +69,6 @@ export const generateChatCompletion = async (req: Request, res: Response, next: 
     return res.status(200).json({ chats: user.chats });
   } catch (error) {
     console.error('Error generating chat completion:', error);
-    return res.status(500).json({ message: 'Internal Server Error', error: (error as Error).message });
+    return res.status(500).json({ message: 'Something went Wrong!!', error: (error as Error).message });
   }
 };
-
